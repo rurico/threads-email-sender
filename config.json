@@ -1,0 +1,21 @@
+{
+    "transport": {
+        "host": "smtp.example.net",
+        "port": 465,
+        "secure": true,
+        "auth": {
+            "user": "email",
+            "pass": "password"
+        }
+    },
+    "mailOptions": {
+        "from": "'公司title' <example@example.com>",
+        "subject": "邮件title",
+        "text": "",
+        "html": "<div></div>"
+    },
+    "receivers": [
+        "example@example.com",
+        "example2@example.com"
+    ]
+}

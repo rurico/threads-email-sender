@@ -1,0 +1,29 @@
+{
+  "name": "threads-email-sender",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node .",
+    "build": "pkg ."
+  },
+  "author": "rurico <babichan@outlook.com> (https://ruriya.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.6.3",
+    "threads": "^1.6.5",
+    "tiny-worker": "^2.3.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.3.1"
+  },
+  "pkg": {
+    "scripts": "workers/**/*.js",
+    "targets": [
+      "node12-win-x64",
+      "node16-macos-x64"
+    ],
+    "outputPath": "dist"
+  }
+}
