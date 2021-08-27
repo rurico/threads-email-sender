@@ -3,7 +3,7 @@
 闲得无聊帮朋友写的多线程邮件发送器
 
 # 前置环境
-nodejs（非必要）
+nodejs（不编译可选）
 
 # 使用方法
 git clone git@github.com:rurico/threads-email-sender.git
