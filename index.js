@@ -1,13 +1,13 @@
 const { spawn, Thread, Worker } = require('threads')
 const { receivers, completion } = require('./config')
-const { writeCache, writeLogs } = require('./io')
+const { writeCache, writeLogs } = require('./io');
 
-~(async () => {
+(async () => {
     const emailSender = await spawn(new Worker("./workers/email-sender"))
 
     for (const receiver of receivers.filter(rcv => !completion.some(r => r === rcv))) {
-        const result = await emailSender.sendEmail(receiver)
-        result && result.messageId && (completion.push(receiver)) && writeCache(completion)
+        const { messageId } = await emailSender.sendEmail(receiver)
+        messageId && (completion.push(receiver), writeCache(completion))
     }
 
     await Thread.terminate(emailSender)
