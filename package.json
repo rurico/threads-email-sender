@@ -11,6 +11,7 @@
   "author": "rurico <babichan@outlook.com> (https://ruriya.com/)",
   "license": "MIT",
   "dependencies": {
+    "mysql": "^2.18.1",
     "nodemailer": "^6.6.3",
     "threads": "^1.6.5",
     "tiny-worker": "^2.3.0"

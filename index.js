@@ -1,11 +1,16 @@
 const { spawn, Thread, Worker } = require('threads')
-const { receivers, completion } = require('./config')
-const { writeCache, writeLogs } = require('./io');
+const { receivers, completion, mySqlConnectionConfig } = require('./config')
+const { writeCache, writeLogs } = require('./io')
+const { connection } = require('./sql')
+const { promisify } = require('util')
+const querySync = promisify(connection.query);
 
 (async () => {
-    const emailSender = await spawn(new Worker("./workers/email-sender"))
+    const emailSender = await spawn(new Worker('./workers/email-sender'))
 
-    for (const receiver of receivers.filter(rcv => !completion.some(r => r === rcv))) {
+    const receiverList = mySqlConnectionConfig instanceof Object ? (await querySync(mySqlConnectionConfig.querySQL)) : receivers
+
+    for (const receiver of receiverList.filter(rcv => !completion.some(r => r === rcv))) {
         const { messageId } = await emailSender.sendEmail(receiver)
         messageId && (completion.push(receiver), writeCache(completion))
     }
