@@ -16,6 +16,7 @@ const querySync = promisify(connection.query);
     }
 
     await Thread.terminate(emailSender)
+    connection.end()
 
     const failList = receivers.filter(rcv => completion.some(r => r === rcv))
     writeLogs(`失败队列: ${failList.join(',')}`)
